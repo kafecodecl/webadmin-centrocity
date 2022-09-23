@@ -1,1 +1,153 @@
-<p>update-departamento works!</p>
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<!-- Page title-->
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Departamento</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo edita un departamento.</p>
+
+    </div>
+</div>
+
+<form #actualizarForm="ngForm" (ngSubmit)="actualizar(actualizarForm)">
+
+    <div class="card box-shadow-sm">
+        <div class="card-header">
+            <h5 style="margin-bottom: 0px;">Editar departamento</h5>
+        </div>
+        <div *ngIf="departamento" class="card-body">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <label for="">Titulo de departamento</label>
+                            <input type="text" class="form-control" placeholder="Titulo de departamento" name="nombre"
+                                [(ngModel)]="departamento.nombre" required>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Nro Habitaciones</label>
+                            <input type="number" class="form-control" placeholder="Número de habitaciones"
+                                name="nHabitaciones" [(ngModel)]="departamento.nHabitaciones" required>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Precio por día</label>
+                            <input type="number" class="form-control" placeholder="Precio" name="price"
+                                [(ngModel)]="departamento.valor" required>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Metros cuadrados</label>
+                            <input type="number" class="form-control" placeholder="Cantidad de metros cuadrados"
+                                name="tamanio" [(ngModel)]="departamento.tamanio" required>
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Nro personas</label>
+                            <input type="number" class="form-control" placeholder="Capacidad de personas"
+                                name="personas" [(ngModel)]="departamento.personas" required>
+                        </div>
+                        <!-- <div class="col-lg-4 form-group">
+                            <label for="">Categoría</label>
+                            <select class="form-control custom-select" name="category" [(ngModel)]="departamento.category"
+                                required>
+                                <option value="" selected disabled>Seleccionar</option>
+                                <option *ngFor="let item of config.categories" value="{{item.title}}">{{ item.title }}
+                                </option>
+                            </select>
+                        </div> -->
+
+                        <div class="form-group row align-items-center mt-2">
+
+                            <label class="col-md-3 col-form-label font-weight-medium" for="text-input">Detalles</label>
+                            <div class="col-md-4">
+                                <input class="form-control" type="text" placeholder="Descripción" name="descripcion"
+                                    [(ngModel)]="descripcion">
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-control" type="text" placeholder="Icono" name="icono"
+                                    [(ngModel)]="icono">
+                            </div>
+                            <div class="col-md-3">
+
+                            </div>
+                            <div class="col-md-9">
+                                <a style="cursor: pointer;" (click)="agregarDetalle()" class="mb-5">Agregar</a>
+                                <div class="table-responsive mt-3">
+                                    <table class="table table-sm">
+                                        <thead class="thead-dark">
+                                            <tr>
+
+                                                <th>Descripción</th>
+                                                <th>Icono</th>
+                                                <th>Eliminar</th>
+
+                                            </tr>
+                                        </thead>
+                                        <ng-container *ngIf="detallesArr.length > 0">
+                                            <tbody *ngFor="let item of detallesArr; let index = index">
+                                                <tr>
+                                                    <td>{{ item.descripcion }}</td>
+                                                    <td>
+
+                                                        {{ item.icono }}
+                                                    </td>
+                                                    <td>
+                                                        <a (click)="eliminarDetalle(index)" style="cursor: pointer;"
+                                                            class="text-danger">[Eliminar]</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </ng-container>
+                                        <ng-container *ngIf="detallesArr.length === 0">
+                                            <tr>
+                                                <td class="text-center" colspan="2">
+                                                    <span class="text-muted">No exites detalles agregados</span>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-lg-12 form-group">
+                            <label for="">Descripción del departamento</label>
+                            <textarea class="form-control" placeholder="Descripción del departamento" name="comentarios"
+                                [(ngModel)]="departamento.comentarios" required rows="5"></textarea>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <label for="">Imagen de Portada</label>
+                            <div class="custom-file">
+                                <input (change)="fileChangeEvent($event)" class="custom-file-input" type="file"
+                                    id="file-input">
+                                <label style="white-space: nowrap; overflow: hidden" id="nameImage"
+                                    class="custom-file-label" for="file-input">Seleccionar
+                                    imagen</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <img [src]="urlBaseImg+departamento.imgPortada" class="img-thumbnail" alt="Imagen">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button *ngIf="!loadData" type="submit" class="btn btn-primary mr-3">Guardar</button>
+            <!-- Button with border spinner and text -->
+            <button *ngIf="loadData" type="button" class="btn btn-primary" disabled>
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                Creando...
+            </button>
+            <button class="btn btn-warning" [routerLink]="['/departamentos/index']">cerrar</button>
+        </div>
+    </div>
+</form>

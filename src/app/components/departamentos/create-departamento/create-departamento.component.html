@@ -32,8 +32,8 @@
                         </div>
                         <div class="col-lg-6 form-group">
                             <label for="">Precio por día</label>
-                            <input type="number" class="form-control" placeholder="Precio" name="price"
-                                [(ngModel)]="departamento.price" required>
+                            <input type="number" class="form-control" placeholder="Precio" name="valor"
+                                [(ngModel)]="departamento.valor" required>
                         </div>
                         <div class="col-lg-6 form-group">
                             <label for="">Metros cuadrados</label>
@@ -70,7 +70,7 @@
 
                             </div>
                             <div class="col-md-9">
-                                <a style="cursor: pointer;" (click)="addCategory()" class="mb-5">Agregar</a>
+                                <a style="cursor: pointer;" (click)="agregarDetalle()" class="mb-5">Agregar</a>
                                 <div class="table-responsive mt-3">
                                     <table class="table table-sm">
                                         <thead class="thead-dark">
@@ -82,22 +82,21 @@
 
                                             </tr>
                                         </thead>
-                                        <ng-container *ngIf="departamento.detalles.length > 0">
-                                            <tbody *ngFor="let item of departamento.detalles; let index = index">
+                                        <ng-container *ngIf="detallesArr.length > 0">
+                                            <tbody *ngFor="let item of detallesArr; let index = index">
                                                 <tr>
                                                     <td>{{ item.descripcion }}</td>
                                                     <td>
-
                                                         {{ item.icono }}
                                                     </td>
                                                     <td>
-                                                        <a (click)="deleteDetalle(index)" style="cursor: pointer;"
+                                                        <a (click)="eliminarDetalle(index)" style="cursor: pointer;"
                                                             class="text-danger">[Eliminar]</a>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </ng-container>
-                                        <ng-container *ngIf="departamento.detalles.length === 0">
+                                        <ng-container *ngIf="detallesArr.length === 0">
                                             <tr>
                                                 <td class="text-center" colspan="2">
                                                     <span class="text-muted">No exites detalles agregados</span>
@@ -113,8 +112,8 @@
 
                         <div class="col-lg-12 form-group">
                             <label for="">Descripción del departamento</label>
-                            <textarea class="form-control" placeholder="Titulo de producto" name="description"
-                                [(ngModel)]="departamento.description" required rows="5"></textarea>
+                            <textarea class="form-control" placeholder="Titulo de producto" name="comentarios"
+                                [(ngModel)]="departamento.comentarios" required rows="5"></textarea>
                         </div>
 
 
@@ -124,7 +123,7 @@
                 <div class="col-lg-4">
                     <div class="row">
                         <div class="col-lg-12 form-group">
-                            <label for="">Imagen de Portada</label>
+                            <label for="">Portada</label>
                             <div class="custom-file">
                                 <input (change)="fileChangeEvent($event)" class="custom-file-input" type="file"
                                     id="file-input">

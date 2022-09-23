@@ -4,10 +4,8 @@
 
 export const environment = {
   production: false,
-  // urlApi: 'http://localhost:4201/api/',
-  // urlApi: 'http://localhost:5001/api-apart-hotel-centrocity/us-central1/app',
-  urlApi:
-    'https://us-central1-api-apart-hotel-centrocity.cloudfunctions.net/app',
+  urlApi: 'http://localhost:4201',
+  // urlApi: 'http://152.44.33.182:4201',
 };
 
 /*
