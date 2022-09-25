@@ -58,10 +58,7 @@ export class CreateDepartamentoComponent implements OnInit {
       return;
     }
 
-    // this.departamento.imgPortada =
-    //   'assets/upload/departamentos/depto_estudio_1/foto6.jpg';
     this.departamento.disponible = true;
-    this.departamento.galeria = [];
 
     this.departamento.detalles = this.detallesArr.map((item: any) => {
       return {
@@ -70,7 +67,6 @@ export class CreateDepartamentoComponent implements OnInit {
       };
     });
 
-    console.log('this.departamento', this.departamento);
     this.loadData = true;
     const resp = await this.departamentoService.crearDepartamento(
       this.departamento,
@@ -137,7 +133,6 @@ export class CreateDepartamentoComponent implements OnInit {
       });
       this.descripcion = '';
       this.icono = '';
-      console.log(this.detallesArr);
     } else {
       // this.messagesService.errorMessageAlert(
       //   'Debe agregar un titulo y un icono a la categoría que desea agregar'

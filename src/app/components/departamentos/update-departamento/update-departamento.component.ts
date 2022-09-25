@@ -40,8 +40,6 @@ export class UpdateDepartamentoComponent implements OnInit {
   ) {
     this.activateRoute.params.subscribe((params: any) => {
       if (params.id) {
-        console.log(params.id);
-
         this.idDepartamento = params.id;
       }
     });
@@ -65,7 +63,14 @@ export class UpdateDepartamentoComponent implements OnInit {
     if (resp.ok === false) {
     } else {
       this.departamento = resp.data;
-      this.detallesArr = this.departamento.detalles.map((item: any) => {
+
+      let detalles = this.departamento.detalles;
+
+      if (typeof detalles === 'string') {
+        detalles = JSON.parse(detalles);
+      }
+
+      this.detallesArr = detalles.map((item: any) => {
         return {
           icono: item.icono,
           descripcion: item.descripcion,
@@ -85,11 +90,6 @@ export class UpdateDepartamentoComponent implements OnInit {
 
     if (this.fileImg !== undefined) {
       this.departamento.imgPortada = this.fileImg;
-    } else {
-      this.messagesService.errorMessageAlert(
-        'debe seleccionar una imagen de protada para el producto'
-      );
-      return;
     }
 
     this.departamento.detalles = this.detallesArr.map((item: any) => {
@@ -100,8 +100,10 @@ export class UpdateDepartamentoComponent implements OnInit {
     });
 
     this.loadData = true;
+
     const resp = await this.departamentoService.actualizarDepartamento(
       this.idDepartamento,
+      this.fileImg,
       this.departamento,
       this.token
     );
@@ -148,6 +150,7 @@ export class UpdateDepartamentoComponent implements OnInit {
           reader.onload = (e) => (this.imgSelected = reader.result);
           reader.readAsDataURL(file);
           $('#nameImage').text(file.name);
+
           this.fileImg = file;
         } else {
           this.messagesService.errorMessageAlert(
@@ -174,6 +177,5 @@ export class UpdateDepartamentoComponent implements OnInit {
       $('#nameImage').text('Seleccionar imagen');
       return;
     }
-    console.log(this.fileImg);
   }
 }

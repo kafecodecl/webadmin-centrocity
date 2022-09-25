@@ -42,21 +42,9 @@ export class IndexDepartamentosComponent implements OnInit {
     }
   }
 
-  filter() {
-    // if (this.filterTitle) {
-    //   this.getProductsAdmin();
-    // } else {
-    //   this.messageServices.warningMessageAlert(
-    //     'debe ingresar un texto para realizar la búsqueda del producto'
-    //   );
-    // }
-  }
-
-  resetFilter() {}
-
   closeConfirmModal(id: string) {
     $('#delete-' + id).modal('hide');
-    $('.modal-backdrop').removeClass('show');
+    $('.modal-backdrop').hide();
   }
 
   async delete(id: string) {
@@ -71,8 +59,10 @@ export class IndexDepartamentosComponent implements OnInit {
       this.messageServices.successMessageAlert(
         'el registro ha sido eliminado con éxito'
       );
-      this.closeConfirmModal(id);
       this.obtenerDepartamentos();
+      setTimeout(() => {
+        this.closeConfirmModal(id);
+      }, 500);
     }
   }
 }

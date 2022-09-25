@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   urlApi: 'http://localhost:4201',
   // urlApi: 'http://152.44.33.182:4201',
+  currency: 'CLP',
+  numberFormat: 'es-CL',
 };
 
 /*

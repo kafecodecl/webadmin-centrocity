@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class AdminService {
   async login(data: any) {
     const url = this.apiUrl + '/api/auth/login';
     const resp = await this.httpClient.post<any>(url, data);
-    return resp.toPromise();
+    return await lastValueFrom(resp);
   }
 
   getToken() {
@@ -57,7 +58,7 @@ export class AdminService {
       Authorization: token,
     });
     const resp = await this.httpClient.get<any>(url, { headers: headers });
-    return resp.toPromise();
+    return await lastValueFrom(resp);
   }
 
   async updateConfigAdmin(id: any, data: any, token: string) {
@@ -70,11 +71,10 @@ export class AdminService {
       const resp = await this.httpClient.put<any>(url, data, {
         headers: headers,
       });
-      return resp.toPromise();
+      return await lastValueFrom(resp);
     }
 
     const fd = new FormData();
-    console.log('coteries: ', data.categories);
 
     fd.append('title', data.title);
     fd.append('categories', JSON.stringify(data.categories));
@@ -85,13 +85,13 @@ export class AdminService {
     const resp = await this.httpClient.put<any>(url, fd, {
       headers: headers,
     });
-    return resp.toPromise();
+    return await lastValueFrom(resp);
   }
 
   async getConfigurationsPublic() {
     const url = this.apiUrl + 'get_configurations_public';
     const resp = await this.httpClient.get<any>(url);
-    return resp.toPromise();
+    return await lastValueFrom(resp);
   }
 
   // get_configurations_public

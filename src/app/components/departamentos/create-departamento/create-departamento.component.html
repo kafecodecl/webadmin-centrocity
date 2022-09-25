@@ -31,7 +31,7 @@
                                 name="nHabitaciones" [(ngModel)]="departamento.nHabitaciones" required>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="">Precio por día</label>
+                            <label for="">Precio por día ($)</label>
                             <input type="number" class="form-control" placeholder="Precio" name="valor"
                                 [(ngModel)]="departamento.valor" required>
                         </div>
@@ -58,14 +58,14 @@
                         <div class="form-group row align-items-center mt-2">
 
                             <label class="col-md-3 col-form-label font-weight-medium" for="text-input">Detalles</label>
-                            <div class="col-md-4">
+                            <div class="col-md-9">
                                 <input class="form-control" type="text" placeholder="Descripción" name="descripcion"
                                     [(ngModel)]="descripcion">
                             </div>
-                            <div class="col-md-5">
+                            <!-- <div class="col-md-5">
                                 <input class="form-control" type="text" placeholder="Icono" name="icono"
                                     [(ngModel)]="icono">
-                            </div>
+                            </div> -->
                             <div class="col-md-3">
 
                             </div>
@@ -77,7 +77,7 @@
                                             <tr>
 
                                                 <th>Descripción</th>
-                                                <th>Icono</th>
+                                                <!-- <th>Icono</th> -->
                                                 <th>Eliminar</th>
 
                                             </tr>
@@ -86,9 +86,9 @@
                                             <tbody *ngFor="let item of detallesArr; let index = index">
                                                 <tr>
                                                     <td>{{ item.descripcion }}</td>
-                                                    <td>
+                                                    <!-- <td>
                                                         {{ item.icono }}
-                                                    </td>
+                                                    </td> -->
                                                     <td>
                                                         <a (click)="eliminarDetalle(index)" style="cursor: pointer;"
                                                             class="text-danger">[Eliminar]</a>

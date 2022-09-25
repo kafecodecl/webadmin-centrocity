@@ -40,8 +40,6 @@ export class LoginComponent implements OnInit {
 
     if (loginForm.valid) {
       let resp = await this.adminService.login(data);
-      console.log(resp);
-
       if (!resp.data) {
         this.messagesService.errorMessageAlert(resp.message);
         return;
@@ -50,7 +48,11 @@ export class LoginComponent implements OnInit {
       // petición correcta
       localStorage.setItem('token', resp.token);
       localStorage.setItem('_id', resp.data._id);
-      this.router.navigate(['/']);
+      localStorage.setItem(
+        'nombre',
+        resp.data.nombres + ' ' + resp.data.apellidos
+      );
+      this.router.navigate(['/departamentos/index']);
     } else {
       this.messagesService.errorMessageAlert(
         'Debe ingresar su usuario y contraseña'

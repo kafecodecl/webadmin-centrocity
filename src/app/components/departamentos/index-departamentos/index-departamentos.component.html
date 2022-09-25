@@ -16,24 +16,6 @@
 </div>
 
 <div class="card box-shadow-sm">
-    <div class="card-header">
-        <h5 style="margin-bottom: 0px;">Filtro de departamentos</h5>
-    </div>
-
-    <div class="card-header">
-        <div class="row">
-            <div class="col-6">
-                <!-- Button addon on the right -->
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Título del producto" name="filterTitle"
-                        [(ngModel)]="filterTitle">
-                    <button class="btn btn-primary mr-2" (click)="filter()" type="button">Buscar</button>
-                    <button class="btn btn-info" (click)="resetFilter()" type="button">Resetear</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
 
     <div class="card-body">
         <div class="table-responsive">
@@ -69,7 +51,7 @@
                                 </h6>
                             </td>
                             <td>{{ item.comentarios }}</td>
-                            <td>{{ item.valor | currency }}</td>
+                            <td>{{ item.valor | currencyMoney }}</td>
                             <td>
 
 
@@ -91,23 +73,6 @@
                                     </div>
                                 </div>
 
-
-                                <!-- <button [routerLink]="['varieties/', item._id]" type="button"
-                                    class="btn btn-primary btn-icon mr-3">
-                                    <i class="small material-icons">art_track</i>
-                                </button> -->
-                                <!-- <button [routerLink]="['/panel/products/', item._id]" type="button"
-                                    class="btn btn-success btn-icon mr-3">
-                                    <i class="small material-icons">edit</i>
-                                </button> -->
-                                <!-- <button [routerLink]="['/panel/products/inventory/', item._id]" type="button"
-                                    class="btn btn-warning btn-icon mr-3">
-                                    <i class="small material-icons">pageview</i>
-                                </button> -->
-                                <!-- <button data-toggle="modal" [attr.data-target]="'#delete-'+item._id" type="button"
-                                    class="btn btn-danger btn-icon">
-                                    <i class="small material-icons">delete</i>
-                                </button> -->
                                 <div class="modal fade" id="delete-{{item._id}}" tabindex="-1" style="display: none;"
                                     aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
