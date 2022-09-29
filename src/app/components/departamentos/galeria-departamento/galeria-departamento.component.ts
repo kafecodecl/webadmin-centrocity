@@ -151,6 +151,6 @@ export class GaleriaDepartamentoComponent implements OnInit {
 
   closeConfirmModal(id: string) {
     $('#delete-' + id).modal('hide');
-    $('.modal-backdrop').removeClass('show');
+    $('.modal-backdrop').hide();
   }
 }
